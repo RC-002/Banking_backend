@@ -4,6 +4,12 @@ postgres:
 createdb:
 	docker exec -it postgres16 createdb --username=root --owner=root bank
 
+migrateup:
+	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/bank?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/bank?sslmode=disable" -verbose down
+	
 dropdb:
 	docker exec -it postgres16 dropdb --username=root --owner=root bank
 
