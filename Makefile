@@ -9,8 +9,11 @@ migrateup:
 
 migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/bank?sslmode=disable" -verbose down
-	
+
 dropdb:
 	docker exec -it postgres16 dropdb --username=root --owner=root bank
 
-.PHONY: postgres createdb dropdb
+sqlc:
+	sqlc generate
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc
